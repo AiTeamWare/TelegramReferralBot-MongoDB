@@ -9,7 +9,7 @@ import (
 
 func sendMessage(chatId int64, text string, keyboard interface{}){
 	msg := tgbotapi.NewMessage(chatId, text)
-	msg.ParseMode = tgbotapi.ModeMarkdown
+	//msg.ParseMode = tgbotapi.ModeMarkdown
 	typeOfKeyboard := reflect.TypeOf(keyboard)
 	if typeOfKeyboard == nil {
 		msg.ReplyMarkup = tgbotapi.ReplyKeyboardRemove{true, false}
@@ -34,7 +34,7 @@ func sendMessage(chatId int64, text string, keyboard interface{}){
 
 func editMessage(chatId int64, messageId int, text string){
 	msg := tgbotapi.NewEditMessageText(chatId, messageId, text)
-	msg.ParseMode = tgbotapi.ModeMarkdown
+	//msg.ParseMode = tgbotapi.ModeMarkdown
 	msg.ReplyMarkup = &keyboard
 	bot.Send(msg)
 	log.Printf("[Bot] EDITED %s TO %v", msg.Text, msg.ChatID)
