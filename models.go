@@ -11,4 +11,5 @@ type User struct {
 	TelegramID                  int
 	Username, Token, EthAddress string
 	RefCount                    int
+	IsJoined					bool
 }

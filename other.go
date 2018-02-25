@@ -28,3 +28,33 @@ func submit(message *tgbotapi.Message) {
 		"t.me/" + configuration.BotUsername + "?start=" + user.Token, keyboard)
 	delete(pending, message.From.ID)
 }
+
+func usersJoined(users *[]tgbotapi.User){
+	for _, val := range *users{
+		var user User
+		err := db.Collection("users").FindOne(bson.M{"telegramid": val.ID}, &user)
+		if err != nil {
+			continue
+		}
+		user.IsJoined = true
+		err = db.Collection("users").Save(&user)
+		if err != nil {
+			log.Panic(err)
+		}
+		log.Printf("User %v joined", val.ID)
+	}
+}
+
+func userLeft(u *tgbotapi.User){
+	var user User
+	err := db.Collection("users").FindOne(bson.M{"telegramid": u.ID}, &user)
+	if err != nil {
+		return
+	}
+	user.IsJoined = false
+	err = db.Collection("users").Save(&user)
+	if err != nil {
+		log.Panic(err)
+	}
+	log.Printf("User %v left", u.ID)
+}

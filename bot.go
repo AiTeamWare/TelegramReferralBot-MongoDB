@@ -55,6 +55,10 @@ func main() {
 					log.Print("It is cancel")
 					cancel(update.Message)
 				}
+			}else if update.Message.NewChatMembers != nil{
+				usersJoined(update.Message.NewChatMembers)
+			}else if update.Message.LeftChatMember != nil{
+				userLeft(update.Message.LeftChatMember)
 			}else {
 				if pending[update.Message.From.ID] == 1{
 					requestRepeat(update.Message)
