@@ -55,9 +55,9 @@ func main() {
 					log.Print("It is cancel")
 					cancel(update.Message)
 				}
-			}else if update.Message.NewChatMembers != nil{
+			}else if update.Message.NewChatMembers != nil && update.Message.Chat.ID == configuration.ChatID{
 				usersJoined(update.Message.NewChatMembers)
-			}else if update.Message.LeftChatMember != nil{
+			}else if update.Message.LeftChatMember != nil && update.Message.Chat.ID == configuration.ChatID{
 				userLeft(update.Message.LeftChatMember)
 			}else {
 				if pending[update.Message.From.ID] == 1{
