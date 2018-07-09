@@ -63,7 +63,9 @@ func main() {
 				if pending[update.Message.From.ID] == 1{
 					requestRepeat(update.Message)
 				}else if pending[update.Message.From.ID] == 2{
-					submit(update.Message)
+					submitEth(update.Message)
+				}else if pending[update.Message.From.ID] == 3{
+					submitEmail(update.Message)
 				}
 			}
 		}else if update.CallbackQuery != nil {
@@ -71,7 +73,7 @@ func main() {
 			switch update.CallbackQuery.Data {
 			case "join":
 				go editJoin(update.CallbackQuery)
-			case "submit":
+			case "submitEth":
 				go editSubmit(update.CallbackQuery)
 			case "check":
 				go editCheck(update.CallbackQuery)
@@ -160,7 +162,7 @@ func initKeyboard(){
 			tgbotapi.NewInlineKeyboardButtonData(phrases[12], "join"),
 		),
 		tgbotapi.NewInlineKeyboardRow(
-			tgbotapi.NewInlineKeyboardButtonData(phrases[13], "submit"),
+			tgbotapi.NewInlineKeyboardButtonData(phrases[13], "submitEth"),
 		),
 		tgbotapi.NewInlineKeyboardRow(
 			tgbotapi.NewInlineKeyboardButtonData(phrases[14], "check"),

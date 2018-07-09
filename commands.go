@@ -15,11 +15,11 @@ func start(message *tgbotapi.Message) {
 		//db.First(&user, "id = ?", message.From.TelegramID)
 		err := db.Collection("users").FindOne(bson.M{"telegramid": message.From.ID}, &user)
 		if err != nil {
-			user := User{TelegramID: message.From.ID,
+			user := User{
+				TelegramID: message.From.ID,
 				Username: message.From.FirstName,
 				Token: generateToken(),
-				EthAddress: "",
-				RefCount: 0}
+			}
 			err = db.Collection("users").Save(&user)
 			if err != nil {
 				log.Panic(err)
@@ -39,11 +39,11 @@ func start(message *tgbotapi.Message) {
 			//db.First(&user, "id = ?", message.From.ID)
 			err = db.Collection("users").FindOne(bson.M{"telegramid": message.From.ID}, &user)
 			if err != nil {
-				user := User{TelegramID: message.From.ID,
+				user := User{
+					TelegramID: message.From.ID,
 					Username: message.From.FirstName,
 					Token: generateToken(),
-					EthAddress: "",
-					RefCount: 0}
+					}
 				//db.Create(&user)
 				err = db.Collection("users").Save(&user)
 				if err != nil {
@@ -64,18 +64,19 @@ func start(message *tgbotapi.Message) {
 				sendMessage(message.Chat.ID, phrases[10], keyboard)
 				return
 			} else {
-				user.RefCount++
-				//db.Save(&user)
-				err = db.Collection("users").Save(&user)
-				if err != nil {
-					log.Panic(err)
-				}
+				//user.RefCount++
+				////db.Save(&user)
+				//err = db.Collection("users").Save(&user)
+				//if err != nil {
+				//	log.Panic(err)
+				//}
 
-				user2 = User{TelegramID: message.From.ID,
+				user2 = User{
+					TelegramID: message.From.ID,
 					Username: message.From.FirstName,
 					Token: generateToken(),
-					EthAddress: "",
-					RefCount: 0}
+					InvitedBy:user.TelegramID,
+				}
 
 				//db.Create(&user2)
 				err = db.Collection("users").Save(&user2)
@@ -108,10 +109,17 @@ func editSubmit(query *tgbotapi.CallbackQuery) {
 	if err != nil {
 		log.Panic(err)
 	}
+	if !user.IsJoined{
+		editMessage(query.Message.Chat.ID, query.Message.MessageID, phrases[15])
+		return
+	}
 
 	if user.EthAddress == "" {
 		editMessage(query.Message.Chat.ID, query.Message.MessageID, phrases[3])
 		pending[query.From.ID] = 1
+	}else if user.Email == ""{
+		editMessage(query.Message.Chat.ID, query.Message.MessageID, phrases[16])
+		pending[query.From.ID] = 3
 	} else {
 		editMessage(query.Message.Chat.ID, query.Message.MessageID, phrases[11])
 	}
@@ -126,7 +134,11 @@ func editCheck(query *tgbotapi.CallbackQuery) {
 	if err != nil {
 		log.Panic(err)
 	}
-	editMessage(query.Message.Chat.ID, query.Message.MessageID, phrases[8] + "t.me/"+
+	text := phrases[8] + "t.me/"+
 		configuration.BotUsername+ "?start="+ user.Token+ "\n\n"+
-		phrases[9]+ strconv.Itoa(user.RefCount))
+		phrases[9]+ strconv.Itoa(user.RefCount) + "\n" + phrases[19] + strconv.Itoa(user.StakesTotal)
+	//if user.IsJoined && user.EthAddress != ""{
+	//	text += "\n"
+	//}
+	editMessage(query.Message.Chat.ID, query.Message.MessageID, text)
 }

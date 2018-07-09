@@ -1,31 +1,30 @@
 {
-	"ImportPath": "TelegramReferralBot",
+	"ImportPath": "TelegramReferralBot2",
 	"GoVersion": "go1.9",
 	"GodepVersion": "v79",
 	"Deps": [
+		{
+			"ImportPath": "github.com/badoux/checkmail",
+			"Rev": "0755fe2dc241caebab64327c352006712f6a55c4"
+		},
+		{
+			"ImportPath": "github.com/go-bongo/bongo",
+			"Comment": "v0.10.4-27-gb02e650",
+			"Rev": "b02e65079c431db9bed1118b72b1679cc8f624e0"
+		},
+		{
+			"ImportPath": "github.com/go-bongo/go-dotaccess",
+			"Rev": "ae070a2d2a38fd7233e255ded21fb26fe36b4796"
+		},
 		{
 			"ImportPath": "github.com/go-telegram-bot-api/telegram-bot-api",
 			"Comment": "v4.6.1",
 			"Rev": "2022d04b94f50056a09962b1ac81cdd821d20a55"
 		},
 		{
-			"ImportPath": "github.com/jinzhu/gorm",
-			"Comment": "v1.0-173-gb1885a6",
-			"Rev": "b1885a643b4977c9089d77eb07c0fd96591f94b8"
-		},
-		{
-			"ImportPath": "github.com/jinzhu/gorm/dialects/sqlite",
-			"Comment": "v1.0-173-gb1885a6",
-			"Rev": "b1885a643b4977c9089d77eb07c0fd96591f94b8"
-		},
-		{
-			"ImportPath": "github.com/jinzhu/inflection",
-			"Rev": "1c35d901db3da928c72a72d8458480cc9ade058f"
-		},
-		{
-			"ImportPath": "github.com/mattn/go-sqlite3",
-			"Comment": "v1.2.0-119-g05548ff",
-			"Rev": "05548ff55570cdb9ac72ff4a25a3b5e77a6fb7e5"
+			"ImportPath": "github.com/oleiade/reflections",
+			"Comment": "0.1.2-12-g0e86b3c",
+			"Rev": "0e86b3c98b2ff33e30c85cfe97d9a63d439fe7eb"
 		},
 		{
 			"ImportPath": "github.com/segmentio/ksuid",
@@ -38,8 +37,29 @@
 			"Rev": "a90a01d73ae432e2611d178c18367fbaa13e0154"
 		},
 		{
-			"ImportPath": "golang.org/x/net/context",
-			"Rev": "b129b8e0fbeb39c8358e51a07ab6c50ad415e72e"
+			"ImportPath": "gopkg.in/mgo.v2",
+			"Comment": "r2016.08.01-5-g3f83fa5",
+			"Rev": "3f83fa5005286a7fe593b055f0d7771a7dce4655"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2/bson",
+			"Comment": "r2016.08.01-5-g3f83fa5",
+			"Rev": "3f83fa5005286a7fe593b055f0d7771a7dce4655"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2/internal/json",
+			"Comment": "r2016.08.01-5-g3f83fa5",
+			"Rev": "3f83fa5005286a7fe593b055f0d7771a7dce4655"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2/internal/sasl",
+			"Comment": "r2016.08.01-5-g3f83fa5",
+			"Rev": "3f83fa5005286a7fe593b055f0d7771a7dce4655"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2/internal/scram",
+			"Comment": "r2016.08.01-5-g3f83fa5",
+			"Rev": "3f83fa5005286a7fe593b055f0d7771a7dce4655"
 		}
 	]
 }
