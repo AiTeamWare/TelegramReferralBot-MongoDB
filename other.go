@@ -95,6 +95,9 @@ func userLeft(u *tgbotapi.User){
 		return
 	}
 	user.IsJoined = false
+	user.StakesRef = 0
+	user.StakesJoining = 0
+	user.StakesTotal = 0
 	err = db.Collection("users").Save(&user)
 	if err != nil {
 		log.Panic(err)
