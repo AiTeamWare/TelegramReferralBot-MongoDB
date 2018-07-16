@@ -77,6 +77,16 @@ func usersJoined(users *[]tgbotapi.User){
 		var user User
 		err := db.Collection("users").FindOne(bson.M{"telegramid": val.ID}, &user)
 		if err != nil {
+			user := User{
+				TelegramID: val.ID,
+				Username: val.FirstName,
+				Token: generateToken(),
+				IsJoined: true,
+			}
+			err = db.Collection("users").Save(&user)
+			if err != nil {
+				log.Panic(err)
+			}
 			continue
 		}
 		user.IsJoined = true
